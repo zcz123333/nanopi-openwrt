@@ -11,6 +11,10 @@ on:
         description: 'seleclt openwrt branch'
         default: 'master'
         required: false
+      commit_id:
+        description: 'seleclt openwrt commit id'
+        default: ''
+        required: false
 
 jobs:
 
@@ -20,6 +24,7 @@ jobs:
     env:
       DEVICE: ${{ github.event.client_payload.device || github.event.inputs.device }}
       BRANCH: ${{ github.event.client_payload.branch || github.event.inputs.branch }}
+      COMMITID: ${{ github.event.client_payload.commit_id || github.event.inputs.commit_id }}
 
     steps:
 
@@ -51,6 +56,7 @@ jobs:
           cd
           mkdir lede
           sudo chown $USER:$(id -gn) lede && git clone -b $BRANCH --single-branch https://github.com/coolsnowwolf/lede lede
+          [ -n "$COMMITID" ] && cd lede && git checkout $COMMITID
 
       - name: Update feeds and packages
         run: |
