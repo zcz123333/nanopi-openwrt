@@ -104,7 +104,7 @@ jobs:
           echo "download start"
           while true; do make V=s download -j && break || true; done
           echo "download done"
-          make -j$[`nproc`+1] IGNORE_ERRORS=1 V=s tools/compile toolchain/compile buildinfo target/compile package/compile package/install target/install
+          make -j$[`nproc`+1] IGNORE_ERRORS=1 V=s tools/compile toolchain/compile buildinfo package/lean/upx/host/compile target/compile package/compile package/install target/install
           if [ ! -e ~/lede/bin/targets/*/*/*imagebuilder*xz ]; then make IGNORE_ERRORS=1 V=sc; fi
 
           echo "======================="
