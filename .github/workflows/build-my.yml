@@ -56,7 +56,9 @@ jobs:
           cd
           mkdir lede
           sudo chown $USER:$(id -gn) lede && git clone -b $BRANCH --single-branch https://github.com/coolsnowwolf/lede lede
-          [ -n "$COMMITID" ] && cd lede && git checkout $COMMITID
+          if [ -n "$COMMITID" ]; then
+            cd lede && git checkout $COMMITID
+          fi
 
       - name: Update feeds and packages
         run: |
