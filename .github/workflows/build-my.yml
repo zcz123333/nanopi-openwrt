@@ -149,7 +149,7 @@ jobs:
         run: |
           sudo sysctl vm.swappiness=0
           ulimit -SHn 65000
-          tar -xvf ib-$DEVICE.tar.xz
+          tar -xvf ~/ib-$DEVICE.tar.xz
           mv *imagebuilder* ib && cd ib
           . $GITHUB_WORKSPACE/scripts/merge_files.sh
           sed -i '/local/d;s/#//' files/etc/opkg/distfeeds.conf
